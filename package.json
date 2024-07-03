@@ -1,0 +1,25 @@
+{
+  "name": "aprove-me",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "<p align=\"center\">\r   <img src=\"./assets/logo-bankme.png\" alt=\"Logo Bankme\" width=\"91\" height=\"108\">\r </p>\r <h1 align=\"center\">\r   Aprove-me\r </h1>",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsx watch --env-file .env src/server.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.14.9",
+    "prisma": "^5.16.1",
+    "tsx": "^4.16.0",
+    "typescript": "^5.5.3"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.16.1",
+    "fastify": "^4.28.1",
+    "fastify-type-provider-zod": "^2.0.0",
+    "zod": "^3.23.8"
+  }
+}
