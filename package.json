@@ -2,7 +2,7 @@
   "name": "aprove-me",
   "version": "1.0.0",
   "type": "module",
-  "description": "<p align=\"center\">\r   <img src=\"./assets/logo-bankme.png\" alt=\"Logo Bankme\" width=\"91\" height=\"108\">\r </p>\r <h1 align=\"center\">\r   Aprove-me\r </h1>",
+  "description": "Testes com Fastify e Prisma",
   "main": "index.js",
   "scripts": {
     "dev": "tsx watch --env-file .env src/server.ts"

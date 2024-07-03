@@ -1,7 +1,7 @@
 import { FastifyInstance } from "fastify";
 import { ZodTypeProvider } from "fastify-type-provider-zod";
 import { z } from "zod";
-import { prisma } from "../lib/prisma.js";
+import { prisma } from "../../lib/prisma.js";
 
 export async function createCedent(app: FastifyInstance) {
   app
@@ -46,7 +46,6 @@ export async function createCedent(app: FastifyInstance) {
         name
       }
     })
-
     return reply.status(201).send({message: 'Cedent created', email: cedent.email, id: cedent.id})
   })
 }
