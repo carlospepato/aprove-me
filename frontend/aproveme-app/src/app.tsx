@@ -1,5 +1,10 @@
+import { BrowserRouter } from "react-router-dom";
+import { Router } from "./router";
+
 export function App() {
   return (
-    <h1 className="text-zinc-50">Hello World</h1>
+    <BrowserRouter>
+      <Router />
+    </BrowserRouter>
   )
 }
