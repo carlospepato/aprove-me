@@ -8,6 +8,9 @@ export async function createPayable(app: FastifyInstance) {
   .withTypeProvider<ZodTypeProvider>()
   .post('/integrations/:cedentId/payable',{
     schema:{
+      headers: z.object({
+        Authorization: z.string()
+      }),
       body: z.object({
         value: z.number()
       }),

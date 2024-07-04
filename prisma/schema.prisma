@@ -27,8 +27,20 @@ model Cedent {
   phone      String
   name       String
   recebiveis Recebivel[]
+  User       User[]
 
   @@unique([email])
-
   @@map("cedents")
+}
+
+model User {
+  id       String @id @default(uuid())
+  email    String
+  password String
+  name     String
+  cedent   Cedent @relation(fields: [cedentId], references: [id])
+  cedentId String
+
+  @@unique([email])
+  @@map("users")
 }
