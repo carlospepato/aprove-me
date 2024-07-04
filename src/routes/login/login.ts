@@ -1,11 +1,10 @@
 import { FastifyInstance } from "fastify";
 import { ZodTypeProvider } from "fastify-type-provider-zod";
-import { emit } from "process";
 import { z } from "zod";
 import { prisma } from "../../lib/prisma.js";
 
 export async function createUser(app: FastifyInstance){
-  app.withTypeProvider<ZodTypeProvider>().post('/integrations/user',{
+  app.withTypeProvider<ZodTypeProvider>().post('/integrations/user/:cedentId',{
     schema:{
       params: z.object({
         cedentId: z.string().uuid()
@@ -92,61 +91,74 @@ export async function deleteUser(app: FastifyInstance){
 export async function getUser(app: FastifyInstance){
   app.withTypeProvider<ZodTypeProvider>().get('/integrations/user',{
     schema:{
-      body: z.object({
-        email: z.string().email().nullable(),
+      querystring: z.object({
+        email: z.string().email(),
       }),
       response:{
         200: z.object({
           message: z.string(),
-          email: z.string().email().nullable(),
-          name: z.string().nullable(),
-          users: z.array(z.string().email()).nullable()
+          email: z.string().email(),
+          name: z.string(),
         }),
         404: z.object({
           message: z.string(),
           email: z.string().email().nullable(),
-          users: z.array(z.string().email()).nullable()
         }),
       }
     }
   }, async (request, reply) => {
-    const { email } = request.body
+    const { email } = request.query
     let user;
-    if(!email){
-     user = await prisma.user.findMany()
-     if(user.length === 0){
-       return reply.status(404).send({
-          message: 'No users found',
-          email,
-          users: []
-       })
-     }
-      return reply.status(200).send({
-        message: 'Users found',
-        email: null,
-        name: null,
-        users: user.map(user => user.email),
-      })
-    }
-    else{
-      user = await prisma.user.findFirst({
-        where:{
-          email
-        }
-      })
-      if(user === null){
-        return reply.status(404).send({
-          message: 'User not found',
-          email,
-          users: []
-        })
+
+    user = await prisma.user.findFirst({
+      where:{
+        email
       }
-      return reply.status(200).send({
-        message: 'User found',
-        email: user.email,
-        name: user.name,
-        users: []
+    })
+    if(user === null){
+      return reply.status(404).send({
+        message: 'User not found',
+        email
       })
     }
+    return reply.status(200).send({
+      message: 'User found',
+      email: user.email,
+      name: user.name
+    })
+  })
+}
+
+export async function getUsers(app: FastifyInstance){
+  app.withTypeProvider<ZodTypeProvider>().get('/integrations/users',{
+    schema:{
+      response:{
+        200: z.object({
+          message: z.string(),
+          users: z.array(z.object({
+            email: z.string().email(),
+            name: z.string(),
+          }))
+        }),
+        404: z.object({
+          message: z.string(),
+        }),
+      }
+    }
+  }, async (request, reply) => {
+    
+    const users = await prisma.user.findMany()
+    if(users.length === 0){
+      return reply.status(404).send({
+        message: 'Users not found',
+      })
+    }
+    return reply.status(200).send({
+      message: 'Users found',
+      users
+    })
+   
+
+    
   })
 }
