@@ -17,9 +17,35 @@ export function Home(){
         </div>
         
         <div className="flex grid-cols-2 items-center justify-between gap-4 p-1">
-          <Link to="/account" className="text-zinc-300">Account</Link>
+          <Link to="/account" className="text-zinc-300 hover:underline">Account</Link>
           <img src="https://github.com/carlospepato.png" alt="" className="h-8 w-8 rounded-full"/>
         </div>
+      </div>
+      <div className="w-full border border-white/20 rounded-md my-14">
+        <table className="w-full text-zinc-200">
+          <thead>
+            <tr>
+              <th className="py-3 px-2.5 text-sm font-semibold text-left">Email</th>
+              <th className="py-3 px-2.5 text-sm font-semibold text-left">Phone</th>
+              <th className="py-3 px-2.5 text-sm font-semibold text-left">Nome</th>
+              <th className="py-3 px-2.5 text-sm font-semibold text-left">Documento</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr className="border-b border-white/10">
+              <td className="py-3 px-2.5 text-sm text-zinc-300">carlos.pepato@gmail.com</td>
+              <td className="py-3 px-2.5 text-sm text-zinc-300">(11) 940153273</td>
+              <td className="py-3 px-2.5 text-sm text-zinc-300">Carlos Eduardo</td>
+              <td className="py-3 px-2.5 text-sm text-zinc-300">12134514</td>
+            </tr>
+            <tr className="border-b border-white/10">
+              <td className="py-3 px-2.5 text-sm text-zinc-300">carlos.pepato@gmail.com</td>
+              <td className="py-3 px-2.5 text-sm text-zinc-300">(11) 940153273</td>
+              <td className="py-3 px-2.5 text-sm text-zinc-300">Carlos Eduardo</td>
+              <td className="py-3 px-2.5 text-sm text-zinc-300">12134514</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   )
